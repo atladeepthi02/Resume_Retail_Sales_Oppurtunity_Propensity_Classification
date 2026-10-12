@@ -9,9 +9,5 @@ python-multipart==0.0.9
 pydantic==2.9.2
 pydantic-settings==2.5.2
 python-dotenv==1.0.1
-matplotlib==3.9.2
-seaborn==0.13.1
-xgboost==2.1.1
-mlflow==2.16.2
 sqlalchemy==2.0.34
 psycopg2-binary==2.9.9

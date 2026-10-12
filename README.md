@@ -155,6 +155,12 @@ python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
+Optional plotting and experiment-tracking dependencies are separate from the API runtime:
+
+```bash
+pip install -r requirements-optional.txt
+```
+
 Frontend dependencies are installed separately:
 
 ```bash
@@ -248,7 +254,21 @@ docker-compose up --build
 
 ## Deployment
 
-The project is prepared for local execution and can be adapted for cloud hosting. The backend is deployment-ready for containers, and the frontend is structured as a standard Next.js app for Vercel deployment.
+The frontend can be deployed to Vercel, while the FastAPI backend runs as a Docker web service on a Python-capable host. `render.yaml` defines a Render Blueprint for the API, and the Docker command binds to the host-provided `PORT`.
+
+### Deploy the backend to Render
+
+1. Push this repository to a Git provider supported by Render.
+2. In Render, create a new **Blueprint** and select this repository. Render will read `render.yaml` and build the Docker service.
+3. Wait for the service health check at `/api/health` to pass, then copy the public service URL.
+
+The included free Render plan may sleep when idle, and its local filesystem is ephemeral. SQLite prediction history is therefore not durable across service replacement; use managed PostgreSQL for persistent production data.
+
+### Connect the Vercel frontend
+
+In the Vercel project settings, add `NEXT_PUBLIC_API_URL` with the public Render service URL (without a trailing slash), then redeploy the frontend. The browser dashboard calls that API URL. Do not set this to `localhost` for a hosted deployment.
+
+Vercel authentication is required to claim or create a permanent frontend project. The Python API is not hosted by Vercel and must be deployed separately.
 
 ## Limitations
 

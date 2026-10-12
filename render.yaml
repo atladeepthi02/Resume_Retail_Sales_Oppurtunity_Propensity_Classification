@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: retail-sales-propensity-api
+    runtime: docker
+    plan: free
+    region: oregon
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/health
+    envVars:
+      - key: LOG_LEVEL
+        value: INFO
