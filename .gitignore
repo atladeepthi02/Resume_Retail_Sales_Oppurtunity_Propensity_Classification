@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.venv/
+.env
+*.sqlite3
+backend/models/*.joblib
+backend/data/raw/
+backend/data/processed/
+backend/data/evaluation/
+backend/data/reports/
+frontend/.next/
+frontend/node_modules/
+.DS_Store
